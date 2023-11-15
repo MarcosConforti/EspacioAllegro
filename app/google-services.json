@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "305106932186",
+    "project_id": "espacio-allegro-32bdd",
+    "storage_bucket": "espacio-allegro-32bdd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:305106932186:android:2951c0049225cbf73730e3",
+        "android_client_info": {
+          "package_name": "com.marcosconforti.espacioallegro"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZ_3KteEeh-N7dv45L42Bj8KgC0qAYwqI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
