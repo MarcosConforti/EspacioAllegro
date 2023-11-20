@@ -8,14 +8,14 @@ import androidx.compose.ui.res.stringResource
 import com.marcosconforti.espacioallegro.R
 
 @Composable
-fun RegisterText() {
+fun RegisterText(navigateToRegister:()->Unit) {
     Text(
         text = stringResource(id = R.string.no_account_question)
     )
     Text(
         text = stringResource(id = R.string.register),
         modifier = Modifier.clickable {
-            // Handle navigation to the registration screen
+            navigateToRegister()
         }
     )
 

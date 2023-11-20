@@ -1,10 +1,10 @@
-package com.marcosconforti.espacioallegro.login.ui.components
+package com.marcosconforti.espacioallegro.register.ui.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
@@ -18,14 +18,14 @@ import com.marcosconforti.espacioallegro.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Email(email: String, onEmailChange:(String)->Unit) {
+fun LastName(lastName:String, onLastNameChange:(String)->Unit){
     OutlinedTextField(
-        value = email,
-        onValueChange = { onEmailChange(it) },
-        label = { Text(stringResource(id = R.string.username_hint)) },
+        value = lastName,
+        onValueChange = { onLastNameChange(it) },
+        label = { Text(stringResource(id = R.string.last_name)) },
         leadingIcon = {
             Icon(
-                imageVector = Icons.Default.Email,
+                imageVector = Icons.Default.Person,
                 contentDescription = null
             )
         },
@@ -35,9 +35,5 @@ fun Email(email: String, onEmailChange:(String)->Unit) {
         keyboardOptions = KeyboardOptions.Default.copy(
             imeAction = ImeAction.Next
         )
-    )    /*keyboardActions = KeyboardActions(
-                onNext = {
-                    textInputService?.performAction(ImeAction.Next)
-                }
-            )*/
+    )
 }
