@@ -19,7 +19,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.LocalTextInputService
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.marcosconforti.espacioallegro.login.ui.components.Email
@@ -31,7 +30,7 @@ import com.marcosconforti.espacioallegro.login.ui.components.RegisterText
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun LoginScreen(loginViewModel: LoginViewModel = hiltViewModel()) {
+fun LoginScreen(loginViewModel: LoginViewModel = hiltViewModel(),navigateToMenu:()->Unit) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     val context = LocalContext.current
@@ -49,7 +48,7 @@ fun LoginScreen(loginViewModel: LoginViewModel = hiltViewModel()) {
             keyboardController = keyboardController,
             onPasswordChange = { password = it })
         Spacer(modifier = Modifier.height(16.dp))
-        LoginButton(email, password, onLoginListener = { loginViewModel.login(email, password) })
+        LoginButton(email, password, onLoginListener = { loginViewModel.login(email, password, navigateToMenu) })
         Spacer(modifier = Modifier.height(16.dp))
         RegisterText()
         Spacer(modifier = Modifier.height(16.dp))
@@ -59,8 +58,8 @@ fun LoginScreen(loginViewModel: LoginViewModel = hiltViewModel()) {
     }
 }
 
-@Preview(showBackground = true)
+/*@Preview(showBackground = true)
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen()
-}
+    LoginScreen({},{})
+}*/

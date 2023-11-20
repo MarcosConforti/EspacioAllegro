@@ -18,8 +18,8 @@ class LoginViewModel @Inject constructor(private val authService: AuthService) :
     private var _isLoading = MutableStateFlow<Boolean>(false)
     val isLoading: StateFlow<Boolean> = _isLoading
 
-    fun login(email: String, password: String,
-    //          navigateToDetail: () -> Unit
+    fun login(
+        email: String, password: String, navigateToMenu: () -> Unit,
     ) {
         viewModelScope.launch {
             _isLoading.value = true
@@ -28,7 +28,7 @@ class LoginViewModel @Inject constructor(private val authService: AuthService) :
             }
             if (result != null) {
                 Log.i("Login","Se ha logueado con exito")
-                //navigateToDetail()
+                navigateToMenu()
             } else {
                 Log.i("Login", "Error, valor nulo")
             }
