@@ -1,4 +1,4 @@
-package com.marcosconforti.espacioallegro.ui.login.components
+package com.marcosconforti.espacioallegro.login.ui.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -23,11 +23,14 @@ import com.marcosconforti.espacioallegro.R
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
-fun Password(password:String, keyboardController:SoftwareKeyboardController?){
-    var currentPassword = password
+fun Password(
+    password: String,
+    keyboardController: SoftwareKeyboardController?,
+    onPasswordChange: (String) -> Unit
+) {
     OutlinedTextField(
-        value = currentPassword,
-        onValueChange = { currentPassword = it },
+        value = password,
+        onValueChange = { onPasswordChange(it) },
         label = { Text(stringResource(id = R.string.password_hint)) },
         leadingIcon = {
             Icon(

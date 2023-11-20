@@ -63,6 +63,9 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
     testImplementation("junit:junit:4.13.2")
+    testImplementation("junit:junit:4.12")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    testImplementation("org.testng:testng:6.9.6")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
@@ -78,8 +81,18 @@ dependencies {
 
     //DaggerHilt
     implementation("com.google.dagger:hilt-android:2.44")
+    implementation("androidx.hilt:hilt-navigation-compose:1.1.0")
     kapt("com.google.dagger:hilt-compiler:2.44")
 
     //ViewModel
     implementation("androidx.activity:activity-ktx:1.7.2")
+
+    //Navigation
+    implementation("androidx.navigation:navigation-compose:2.7.0")
+    androidTestImplementation("androidx.navigation:navigation-testing:2.7.0")
+
+    //Mockk
+    testImplementation ("io.mockk:mockk:1.12.0")
+    androidTestImplementation ("io.mockk:mockk-android:1.12.0")
+
 }

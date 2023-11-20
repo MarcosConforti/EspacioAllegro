@@ -1,4 +1,4 @@
-package com.marcosconforti.espacioallegro.ui.login.components
+package com.marcosconforti.espacioallegro.login.ui.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -18,11 +18,10 @@ import com.marcosconforti.espacioallegro.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Email(username: String) {
-    var getUserName = username
+fun Email(email: String, onEmailChange:(String)->Unit) {
     OutlinedTextField(
-        value = getUserName,
-        onValueChange = { getUserName = it },
+        value = email,
+        onValueChange = { onEmailChange(it) },
         label = { Text(stringResource(id = R.string.username_hint)) },
         leadingIcon = {
             Icon(

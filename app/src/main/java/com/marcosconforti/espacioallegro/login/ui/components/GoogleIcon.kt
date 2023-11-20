@@ -1,4 +1,4 @@
-package com.marcosconforti.espacioallegro.ui.login.components
+package com.marcosconforti.espacioallegro.login.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.material3.IconButton

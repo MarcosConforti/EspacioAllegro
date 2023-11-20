@@ -1,4 +1,4 @@
-package com.marcosconforti.espacioallegro.ui.login.components
+package com.marcosconforti.espacioallegro.login.ui.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -11,11 +11,13 @@ import androidx.compose.ui.unit.dp
 import com.marcosconforti.espacioallegro.R
 
 @Composable
-fun LoginButton(){
+fun LoginButton(email: String, password:String,onLoginListener:()->Unit){
+
     Button(
         onClick = {
-            // Handle login logic here
+            onLoginListener()
         },
+        enabled = email.isNotEmpty() && password.isNotEmpty(),
         modifier = Modifier
             .fillMaxWidth()
             .height(50.dp)
