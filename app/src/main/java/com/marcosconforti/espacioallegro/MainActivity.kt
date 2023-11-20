@@ -7,12 +7,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.marcosconforti.espacioallegro.login.ui.LoginScreen
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.marcosconforti.espacioallegro.core.Navigator
 import com.marcosconforti.espacioallegro.ui.theme.EspacioAllegroTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private lateinit var navController:NavHostController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -22,7 +26,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    LoginScreen()
+                    navController = rememberNavController()
+                    Navigator(navController)
                 }
             }
         }
