@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Espacio Allegro</string>
+    <string name="login_button">Login</string>
+    <string name="password_hint">Contraseña\n</string>
+    <string name="username_hint">Email</string>
+    <string name="no_account_question">¿No tienes una cuenta?\n</string>
+    <string name="register">Registrate</string>
+    <string name="login_with_google">Acceder con Google\n</string>
 </resources>
