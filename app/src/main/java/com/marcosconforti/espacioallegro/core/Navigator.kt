@@ -11,7 +11,7 @@ import com.marcosconforti.espacioallegro.register.ui.RegisterScreen
 
 @Composable
 fun Navigator(navigationController: NavHostController) {
-    NavHost(navController = navigationController, startDestination = Login.route) {
+    NavHost(navController = navigationController, startDestination = Menu.route) {
         composable(Login.route) {
             LoginScreen(navigateToMenu = { navigationController.navigate(Menu.route)},
                 navigateToRegister = {navigationController.navigate(Register.route)})
@@ -20,7 +20,7 @@ fun Navigator(navigationController: NavHostController) {
             RegisterScreen(navigateToMenu = {navigationController.navigate(Menu.route)})
         }
         composable(Menu.route){
-            MenuScreen()
+            MenuScreen(navigateToTeacherProfile = {navigationController.navigate(TeacherProfile.route)})
         }
     }
 }
