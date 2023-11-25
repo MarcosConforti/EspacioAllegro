@@ -9,10 +9,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun Content() {
+fun Content(navigateToTeacherProfile:()->Unit) {
     Column(modifier = Modifier.padding(top = 64.dp)) {
         SubjectsRow()
         Spacer(modifier = Modifier.height(4.dp))
-        TeacherScreen()
+        TeacherScreen(navigateToTeacherProfile)
     }
 }

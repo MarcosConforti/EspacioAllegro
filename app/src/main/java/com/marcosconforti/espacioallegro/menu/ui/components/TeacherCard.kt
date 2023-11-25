@@ -26,13 +26,13 @@ import com.marcosconforti.espacioallegro.R
 @Composable
 fun TeacherCard(
 //teacher: List<Teacher>
-//navigateToTeacherProfile:()->Unit
+navigateToTeacherProfile:()->Unit
 ) {
     Card(
         modifier = Modifier
             .width(200.dp)
             .height(230.dp)
-            .clickable { }
+            .clickable {navigateToTeacherProfile() }
             .clip(MaterialTheme.shapes.medium)
             .padding(8.dp),
         shape = RoundedCornerShape(topStart = 16.dp, bottomEnd = 16.dp),

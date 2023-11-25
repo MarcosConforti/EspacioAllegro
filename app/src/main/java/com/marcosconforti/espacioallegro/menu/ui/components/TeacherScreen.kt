@@ -7,14 +7,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
 @Composable
-fun TeacherScreen(){
+fun TeacherScreen(navigateToTeacherProfile:()-> Unit){
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = Modifier
             .fillMaxSize()
     ) {
         items(10) {
-            TeacherCard()
+            TeacherCard(navigateToTeacherProfile = navigateToTeacherProfile)
         }
     }
 }
