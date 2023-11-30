@@ -10,4 +10,6 @@
 
     <string name="name">Nombre</string>
     <string name="last_name">Apellido</string>
+
+    <string name="default_web_client_id">305106932186-tsrpb53oo0auh6dhtt80in4bj9p2hp60.apps.googleusercontent.com</string>
 </resources>

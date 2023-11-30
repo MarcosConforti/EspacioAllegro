@@ -95,4 +95,7 @@ dependencies {
     testImplementation ("io.mockk:mockk:1.12.0")
     androidTestImplementation ("io.mockk:mockk-android:1.12.0")
 
+    //Coil
+    implementation("io.coil-kt:coil-compose:2.5.0")
+
 }
