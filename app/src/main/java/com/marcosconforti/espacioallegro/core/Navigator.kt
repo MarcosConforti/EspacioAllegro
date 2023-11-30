@@ -1,23 +1,29 @@
 package com.marcosconforti.espacioallegro.core
 
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.marcosconforti.espacioallegro.TeacherProfileScreen
 import com.marcosconforti.espacioallegro.UserProfileScreen
-import com.marcosconforti.espacioallegro.core.Route.*
+import com.marcosconforti.espacioallegro.core.Route.Login
+import com.marcosconforti.espacioallegro.core.Route.Menu
+import com.marcosconforti.espacioallegro.core.Route.Register
+import com.marcosconforti.espacioallegro.core.Route.TeacherProfile
+import com.marcosconforti.espacioallegro.core.Route.UserProfile
 import com.marcosconforti.espacioallegro.login.ui.LoginScreen
 import com.marcosconforti.espacioallegro.menu.ui.MenuScreen
 import com.marcosconforti.espacioallegro.register.ui.RegisterScreen
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun Navigator(navigationController: NavHostController) {
-    NavHost(navController = navigationController, startDestination = Menu.route) {
+    NavHost(navController = navigationController, startDestination = Login.route) {
+
         composable(Login.route) {
-            LoginScreen(navigateToMenu = { navigationController.navigate(Menu.route) },
+            LoginScreen(navigateToMenu = {navigationController.navigate(Menu.route)},
+                navigateFromGoogleToMenu = {
+                navigationController.navigate(Menu.route)},
                 navigateToRegister = { navigationController.navigate(Register.route) })
         }
         composable(Register.route) {

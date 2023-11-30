@@ -1,5 +1,6 @@
 package com.marcosconforti.espacioallegro.login.ui
 
+import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -33,6 +34,7 @@ import com.marcosconforti.espacioallegro.login.ui.components.RegisterText
 fun LoginScreen(
     loginViewModel: LoginViewModel = hiltViewModel(),
     navigateToMenu: () -> Unit,
+    navigateFromGoogleToMenu:()->Unit,
     navigateToRegister: () -> Unit
 ) {
     var email by remember { mutableStateOf("") }
@@ -52,21 +54,13 @@ fun LoginScreen(
             keyboardController = keyboardController,
             onPasswordChange = { password = it })
         Spacer(modifier = Modifier.height(16.dp))
-        LoginButton(
-            email,
-            password,
+        LoginButton(email, password,
             onLoginListener = { loginViewModel.login(email, password, navigateToMenu) })
         Spacer(modifier = Modifier.height(16.dp))
         RegisterText(navigateToRegister = {navigateToRegister()})
         Spacer(modifier = Modifier.height(16.dp))
         Divider(modifier = Modifier.background(color = Color.Black))
         Spacer(modifier = Modifier.height(16.dp))
-        GoogleIcon()
+        GoogleIcon(loginViewModel) {navigateFromGoogleToMenu()}
     }
 }
-
-/*@Preview(showBackground = true)
-@Composable
-fun LoginScreenPreview() {
-    LoginScreen({},{})
-}*/

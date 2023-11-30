@@ -10,10 +10,7 @@ import kotlin.coroutines.resumeWithException
 
 class RegisterService @Inject constructor(private val firebaseAuth: FirebaseAuth) {
 
-    suspend fun register(
-        email: String,
-        password: String
-    ): FirebaseUser? {
+    suspend fun register(email: String, password: String): FirebaseUser? {
         return suspendCancellableCoroutine { cancellableContinuation ->
             firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener {

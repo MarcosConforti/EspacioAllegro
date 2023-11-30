@@ -1,8 +1,12 @@
 package com.marcosconforti.espacioallegro.login.ui
 
+import android.net.Uri
 import android.util.Log
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.marcosconforti.espacioallegro.login.data.AuthService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -15,8 +19,11 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(private val authService: AuthService) : ViewModel() {
 
-    private var _isLoading = MutableStateFlow<Boolean>(false)
+    private var _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
+
+    private val _userImageUrl = mutableStateOf<String?>(null)
+    val userImageUrl: State<String?> = _userImageUrl
 
     fun login(
         email: String, password: String, navigateToMenu: () -> Unit,
@@ -27,12 +34,40 @@ class LoginViewModel @Inject constructor(private val authService: AuthService) :
                 authService.login(email, password)
             }
             if (result != null) {
-                Log.i("Login","Se ha logueado con exito")
+                Log.i("Login", "Se ha logueado con exito")
                 navigateToMenu()
             } else {
                 Log.i("Login", "Error, valor nulo")
             }
             _isLoading.value = false
         }
+    }
+
+    //Login with Google
+
+    fun onGoogleLoginSelected(googleLauncherLogin: (GoogleSignInClient) -> Unit) {
+        val gsc = authService.getGoogleClient()
+        getImage()
+        googleLauncherLogin(gsc)
+    }
+
+    fun loginWithGoogle(
+        idToken: String,
+        navigateFromGoogleToMain: () -> Unit
+    ) {
+        viewModelScope.launch {
+            val result = withContext(Dispatchers.IO) {
+                authService.loginWithGoogle(idToken)
+            }
+            if (result != null) {
+
+                navigateFromGoogleToMain()
+            }
+        }
+    }
+
+    private fun getImage() {
+        val imageUrl = authService.getImageUser()
+        _userImageUrl.value = imageUrl?.toString()
     }
 }

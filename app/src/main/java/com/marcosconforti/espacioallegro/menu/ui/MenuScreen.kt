@@ -1,7 +1,6 @@
 package com.marcosconforti.espacioallegro.menu.ui
 
 import android.annotation.SuppressLint
-import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalNavigationDrawer
@@ -37,7 +36,7 @@ fun MenuScreen(
                     navigateToUserProfile = navigateToUserProfile
                 )
             },
-            content = { Content(navigateToTeacherProfile) }
+            content = { Content(navigateToTeacherProfile) },
         )
     }
 
