@@ -14,7 +14,7 @@ fun TeacherScreen(navigateToTeacherProfile:()-> Unit){
             .fillMaxSize()
     ) {
         items(10) {
-            TeacherCard(navigateToTeacherProfile = navigateToTeacherProfile)
+            TeacherCard(navigateToTeacherProfile)
         }
     }
 }
