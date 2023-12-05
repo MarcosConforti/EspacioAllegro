@@ -4,8 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.marcosconforti.espacioallegro.TeacherProfileScreen
-import com.marcosconforti.espacioallegro.UserProfileScreen
 import com.marcosconforti.espacioallegro.core.Route.Login
 import com.marcosconforti.espacioallegro.core.Route.Menu
 import com.marcosconforti.espacioallegro.core.Route.Register
@@ -14,6 +12,8 @@ import com.marcosconforti.espacioallegro.core.Route.UserProfile
 import com.marcosconforti.espacioallegro.login.ui.LoginScreen
 import com.marcosconforti.espacioallegro.menu.ui.MenuScreen
 import com.marcosconforti.espacioallegro.register.ui.RegisterScreen
+import com.marcosconforti.espacioallegro.teacherProfile.ui.TeacherProfileScreen
+import com.marcosconforti.espacioallegro.userProfile.ui.UserProfileScreen
 
 
 @Composable
@@ -38,7 +38,7 @@ fun Navigator(navigationController: NavHostController) {
             TeacherProfileScreen()
         }
         composable(UserProfile.route) {
-            UserProfileScreen()
+           UserProfileScreen()
         }
     }
 }
