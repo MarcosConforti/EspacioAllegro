@@ -4,11 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.marcosconforti.espacioallegro.core.Route.Login
-import com.marcosconforti.espacioallegro.core.Route.Menu
-import com.marcosconforti.espacioallegro.core.Route.Register
-import com.marcosconforti.espacioallegro.core.Route.TeacherProfile
-import com.marcosconforti.espacioallegro.core.Route.UserProfile
+import com.marcosconforti.espacioallegro.LibraryScreen
+import com.marcosconforti.espacioallegro.core.Route.*
 import com.marcosconforti.espacioallegro.login.ui.LoginScreen
 import com.marcosconforti.espacioallegro.menu.ui.MenuScreen
 import com.marcosconforti.espacioallegro.register.ui.RegisterScreen
@@ -21,17 +18,22 @@ fun Navigator(navigationController: NavHostController) {
     NavHost(navController = navigationController, startDestination = Login.route) {
 
         composable(Login.route) {
-            LoginScreen(navigateToMenu = {navigationController.navigate(Menu.route)},
-                navigateFromGoogleToMenu = {
-                navigationController.navigate(Menu.route)},
+            LoginScreen(
+                navigateToMenu = {navigationController.navigate(Menu.route)},
+                navigateFromGoogleToMenu = { navigationController.navigate(Menu.route)},
                 navigateToRegister = { navigationController.navigate(Register.route) })
         }
         composable(Register.route) {
             RegisterScreen(navigateToMenu = { navigationController.navigate(Menu.route) })
         }
         composable(Menu.route) {
-            MenuScreen(navigateToTeacherProfile = { navigationController.navigate(TeacherProfile.route) },
-                navigateToUserProfile = { navigationController.navigate(UserProfile.route) }
+            MenuScreen(
+                navigateToTeacherProfile = { navigationController.navigate(TeacherProfile.route) },
+                navigateToUserProfile = { navigationController.navigate(UserProfile.route)},
+                navigateToSettings = {navigationController.navigate(Library.route)},
+                navigateToAcercaDe = {navigationController.navigate(Library.route)},
+                navigateToLibrary = {navigationController.navigate(Library.route)},
+                navigateToLogin = {navigationController.navigate(Login.route)}
             )
         }
         composable(TeacherProfile.route) {
@@ -39,6 +41,15 @@ fun Navigator(navigationController: NavHostController) {
         }
         composable(UserProfile.route) {
            UserProfileScreen()
+        }
+        composable(Library.route){
+            LibraryScreen()
+        }
+        composable(Settings.route){
+            LibraryScreen()
+        }
+        composable(AcercaDe.route){
+            LibraryScreen()
         }
     }
 }

@@ -17,21 +17,28 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NavigationDrawerScreen(drawerState: DrawerState) {
-    val drawerItems = DrawerItems()
-
+fun NavigationDrawerScreen(
+    drawerState: DrawerState,
+    items: List<NavigationItems>,
+    onItemClick: (NavigationItems) -> Unit
+) {
     val scope = rememberCoroutineScope()
     var selectedItemIndex by rememberSaveable {
         mutableStateOf(0)
     }
 
     ModalDrawerSheet {
-        drawerItems.items.forEachIndexed { index, item ->
+        items.forEachIndexed { index, item ->
             NavigationDrawerItem(
                 label = { Text(text = item.title) },
                 selected = index == selectedItemIndex,
-                onClick = {selectedItemIndex = index
-                          scope.launch { drawerState.close() }},
+                onClick = {
+                    selectedItemIndex = index
+                    scope.launch {
+                        drawerState.close()
+                    }
+                    onItemClick(item)
+                },
                 icon = {
                     Icon(
                         imageVector = if (index == selectedItemIndex) {
@@ -44,3 +51,4 @@ fun NavigationDrawerScreen(drawerState: DrawerState) {
         }
     }
 }
+
