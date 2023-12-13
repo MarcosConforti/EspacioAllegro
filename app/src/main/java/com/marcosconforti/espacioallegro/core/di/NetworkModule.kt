@@ -1,4 +1,4 @@
-package com.marcosconforti.espacioallegro.login.data
+package com.marcosconforti.espacioallegro.core.di
 
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module

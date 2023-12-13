@@ -42,15 +42,9 @@ fun Password(
             .fillMaxWidth()
             .padding(8.dp),
         visualTransformation = PasswordVisualTransformation(),
-        keyboardOptions = KeyboardOptions.Default.copy(
-            imeAction = ImeAction.Done,
-            keyboardType = KeyboardType.Password
-        ),
-        keyboardActions = KeyboardActions(
-            onDone = {
-                keyboardController?.hide()
-            }
-        )
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+        singleLine = true,
+        maxLines = 1
     )
 
 }

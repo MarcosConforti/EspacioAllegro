@@ -58,6 +58,7 @@ fun RegisterScreen(registerViewModel: RegisterViewModel = hiltViewModel(),
                     email, password,
                     navigateToMenu
                 )
+                registerViewModel.insertUser(name,lastName,email,password)
             })
     }
 }

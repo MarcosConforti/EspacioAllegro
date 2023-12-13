@@ -1,4 +1,4 @@
-package com.marcosconforti.espacioallegro.register.data
+package com.marcosconforti.espacioallegro.register.data.network
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
