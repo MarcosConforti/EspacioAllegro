@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.marcosconforti.espacioallegro.R
 
@@ -32,12 +33,8 @@ fun Email(email: String, onEmailChange:(String)->Unit) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp),
-        keyboardOptions = KeyboardOptions.Default.copy(
-            imeAction = ImeAction.Next
-        )
-    )    /*keyboardActions = KeyboardActions(
-                onNext = {
-                    textInputService?.performAction(ImeAction.Next)
-                }
-            )*/
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+        singleLine = true,
+        maxLines = 1
+    )
 }

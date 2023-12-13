@@ -12,7 +12,6 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.marcosconforti.espacioallegro.core.Navigator
-import com.marcosconforti.espacioallegro.core.Route
 import com.marcosconforti.espacioallegro.ui.theme.EspacioAllegroTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,7 +24,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen().apply {
-            setKeepOnScreenCondition{splashViewModel.splashLoading} }
+            setKeepOnScreenCondition{splashViewModel.splashLoading}}
         splashViewModel.checkLoading()
 
         setContent {

@@ -18,14 +18,14 @@ import com.marcosconforti.espacioallegro.userProfile.ui.UserProfileScreen
 
 
 @Composable
-fun Navigator(navigationController: NavHostController,viewModel: SplashViewModel) {
+fun Navigator(navigationController: NavHostController, viewModel: SplashViewModel) {
 
     val currentDestination by viewModel.destination.collectAsState()
 
     NavHost(navController = navigationController, startDestination = Login.route) {
 
-        composable(Login.route) {
-            if (currentDestination == Login) {
+        if (currentDestination == Login) {
+            composable(Login.route) {
                 LoginScreen(
                     navigateToMenu = { navigationController.navigate(Route.Menu.route) },
                     navigateFromGoogleToMenu = { navigationController.navigate(Route.Menu.route) },
@@ -39,26 +39,26 @@ fun Navigator(navigationController: NavHostController,viewModel: SplashViewModel
         composable(Menu.route) {
             MenuScreen(
                 navigateToTeacherProfile = { navigationController.navigate(TeacherProfile.route) },
-                navigateToUserProfile = { navigationController.navigate(UserProfile.route)},
-                navigateToSettings = {navigationController.navigate(Library.route)},
-                navigateToAcercaDe = {navigationController.navigate(Library.route)},
-                navigateToLibrary = {navigationController.navigate(Library.route)},
-                navigateToLogin = {navigationController.navigate(Login.route)}
+                navigateToUserProfile = { navigationController.navigate(UserProfile.route) },
+                navigateToSettings = { navigationController.navigate(Library.route) },
+                navigateToAcercaDe = { navigationController.navigate(Library.route) },
+                navigateToLibrary = { navigationController.navigate(Library.route) },
+                navigateToLogin = { navigationController.navigate(Login.route) }
             )
         }
         composable(TeacherProfile.route) {
             TeacherProfileScreen()
         }
         composable(UserProfile.route) {
-           UserProfileScreen()
+            UserProfileScreen()
         }
-        composable(Library.route){
+        composable(Library.route) {
             LibraryScreen()
         }
-        composable(Settings.route){
+        composable(Settings.route) {
             LibraryScreen()
         }
-        composable(AcercaDe.route){
+        composable(AcercaDe.route) {
             LibraryScreen()
         }
     }
