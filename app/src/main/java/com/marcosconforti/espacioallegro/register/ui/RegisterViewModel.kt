@@ -1,5 +1,6 @@
 package com.marcosconforti.espacioallegro.register.ui
 
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -22,7 +23,7 @@ class RegisterViewModel @Inject constructor(
 ) :
     ViewModel() {
 
-    private var _isLoading = MutableStateFlow<Boolean>(false)
+    private var _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
 
     fun register(
@@ -48,7 +49,7 @@ class RegisterViewModel @Inject constructor(
         }
     }
 
-    fun insertUser(name:String,lastName:String,email: String,password: String) {
+    fun insertUser(name:String,lastName:String,email: String,password: String, image: Uri?) {
         viewModelScope.launch {
             val id = UUID.randomUUID().hashCode()
             val insertUser = RegisterUserEntities(
@@ -56,7 +57,8 @@ class RegisterViewModel @Inject constructor(
                 name = name,
                 lastName = lastName,
                 email = email,
-                password = password
+                password = password,
+                image = image.toString()
             )
             repository.insertUser(insertUser)
             Log.i("probando Room ","los datos son $insertUser")

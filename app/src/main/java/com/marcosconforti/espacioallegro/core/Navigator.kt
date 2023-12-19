@@ -1,15 +1,19 @@
 package com.marcosconforti.espacioallegro.core
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.marcosconforti.espacioallegro.LibraryScreen
 import com.marcosconforti.espacioallegro.SplashViewModel
-import com.marcosconforti.espacioallegro.core.Route.*
+import com.marcosconforti.espacioallegro.core.Route.AcercaDe
+import com.marcosconforti.espacioallegro.core.Route.Library
+import com.marcosconforti.espacioallegro.core.Route.Login
+import com.marcosconforti.espacioallegro.core.Route.Menu
+import com.marcosconforti.espacioallegro.core.Route.Register
+import com.marcosconforti.espacioallegro.core.Route.Settings
+import com.marcosconforti.espacioallegro.core.Route.TeacherProfile
+import com.marcosconforti.espacioallegro.core.Route.UserProfile
 import com.marcosconforti.espacioallegro.login.ui.LoginScreen
 import com.marcosconforti.espacioallegro.menu.ui.MenuScreen
 import com.marcosconforti.espacioallegro.register.ui.RegisterScreen
@@ -20,22 +24,17 @@ import com.marcosconforti.espacioallegro.userProfile.ui.UserProfileScreen
 @Composable
 fun Navigator(navigationController: NavHostController, viewModel: SplashViewModel) {
 
-    val currentDestination by viewModel.destination.collectAsState()
 
     NavHost(navController = navigationController, startDestination = Login.route) {
 
-        if (currentDestination == Login) {
-            composable(Login.route) {
-                LoginScreen(
-                    navigateToMenu = { navigationController.navigate(Route.Menu.route) },
-                    navigateFromGoogleToMenu = { navigationController.navigate(Route.Menu.route) },
-                    navigateToRegister = { navigationController.navigate(Route.Register.route) }
-                )
-            }
+        composable(Login.route) {
+            LoginScreen(
+                navigateToMenu = { navigationController.navigate(Menu.route) },
+                navigateFromGoogleToMenu = { navigationController.navigate(Menu.route) },
+                navigateToRegister = { navigationController.navigate(Register.route) }
+            )
         }
-        composable(Register.route) {
-            RegisterScreen(navigateToMenu = { navigationController.navigate(Menu.route) })
-        }
+
         composable(Menu.route) {
             MenuScreen(
                 navigateToTeacherProfile = { navigationController.navigate(TeacherProfile.route) },
@@ -46,6 +45,11 @@ fun Navigator(navigationController: NavHostController, viewModel: SplashViewMode
                 navigateToLogin = { navigationController.navigate(Login.route) }
             )
         }
+
+        composable(Register.route) {
+            RegisterScreen(navigateToMenu = { navigationController.navigate(Menu.route) })
+        }
+
         composable(TeacherProfile.route) {
             TeacherProfileScreen()
         }
@@ -62,10 +66,5 @@ fun Navigator(navigationController: NavHostController, viewModel: SplashViewMode
             LibraryScreen()
         }
     }
-    //Controlar la navegacion con SplashScreen
-    DisposableEffect(currentDestination) {
-        onDispose {
-            navigationController.navigate(currentDestination.route)
-        }
-    }
+
 }

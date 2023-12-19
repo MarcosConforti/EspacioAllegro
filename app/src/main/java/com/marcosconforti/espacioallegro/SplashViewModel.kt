@@ -25,10 +25,12 @@ class SplashViewModel @Inject constructor(private val authService: AuthService) 
 
     fun checkLoading(){
         viewModelScope.launch {
-            splashLoading = isUserLogged()
-            if (splashLoading) {
+            val userLog = isUserLogged()
+            if (userLog) {
+                splashLoading = false
                 _destination.value = Route.Menu
             } else {
+                splashLoading = false
                 _destination.value = Route.Login
             }
         }
@@ -38,7 +40,9 @@ class SplashViewModel @Inject constructor(private val authService: AuthService) 
         return authService.isUserLogged()
     }
 
-    /*fun checkDestination(): SplashDestination {
+}
+
+/*fun checkDestination(): SplashDestination {
         splashLoading = isUserLogged()
         return if (splashLoading) {
             SplashDestination.Home
@@ -46,5 +50,3 @@ class SplashViewModel @Inject constructor(private val authService: AuthService) 
             SplashDestination.Login
         }
     }*/
-
-}

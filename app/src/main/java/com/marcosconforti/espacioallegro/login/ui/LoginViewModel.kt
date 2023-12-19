@@ -1,5 +1,6 @@
 package com.marcosconforti.espacioallegro.login.ui
 
+import android.net.Uri
 import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -7,16 +8,22 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.marcosconforti.espacioallegro.login.data.AuthService
+import com.marcosconforti.espacioallegro.register.data.RegisterRepository
+import com.marcosconforti.espacioallegro.register.data.database.RegisterUserEntities
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val authService: AuthService) : ViewModel() {
+class LoginViewModel @Inject constructor(
+    private val authService: AuthService,
+    private val repository: RegisterRepository
+) : ViewModel() {
 
     private var _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
@@ -65,8 +72,26 @@ class LoginViewModel @Inject constructor(private val authService: AuthService) :
         }
     }
 
+    fun insertGoogleUser(name: String?, lastName: String?, email: String?, image: Uri?) {
+        viewModelScope.launch {
+            val id = UUID.randomUUID().hashCode()
+            val insertUser = RegisterUserEntities(
+                id = id,
+                name = name.orEmpty(),
+                lastName = lastName.orEmpty(),
+                email = email.orEmpty(),
+                password = "",
+                image = image.toString()
+            )
+            repository.insertUser(insertUser)
+            Log.i("probando Room ", "los datos son $insertUser")
+        }
+    }
     private fun getImage() {
         val imageUrl = authService.getImageUser()
         _userImageUrl.value = imageUrl?.toString()
     }
 }
+
+
+
