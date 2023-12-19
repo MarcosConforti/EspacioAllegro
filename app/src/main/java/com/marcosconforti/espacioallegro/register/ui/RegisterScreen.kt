@@ -1,5 +1,6 @@
 package com.marcosconforti.espacioallegro.register.ui
 
+import android.net.Uri
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -33,6 +34,7 @@ fun RegisterScreen(registerViewModel: RegisterViewModel = hiltViewModel(),
     var lastName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    val image: Uri? = null
     val context = LocalContext.current
     val keyboardController = LocalSoftwareKeyboardController.current
     val textInputService = LocalTextInputService.current
@@ -58,7 +60,7 @@ fun RegisterScreen(registerViewModel: RegisterViewModel = hiltViewModel(),
                     email, password,
                     navigateToMenu
                 )
-                registerViewModel.insertUser(name,lastName,email,password)
+                registerViewModel.insertUser(name,lastName,email,password,image)
             })
     }
 }

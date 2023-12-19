@@ -21,6 +21,10 @@ import com.marcosconforti.espacioallegro.login.ui.LoginViewModel
 fun GoogleIcon(viewModel: LoginViewModel, navigateFromGoogleToMenu: () -> Unit) {
     val context = LocalContext.current
     var image: Uri? = null
+    var name:String? = null
+    var lastName:String? = null
+    var email:String? = null
+
     val googleLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 result: ActivityResult ->
@@ -28,10 +32,15 @@ fun GoogleIcon(viewModel: LoginViewModel, navigateFromGoogleToMenu: () -> Unit) 
                 val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                 try {
                     val account = task.getResult(ApiException::class.java)!!
-                    //image = task.result.photoUrl
+                    name = task.result.givenName
+                    lastName = task.result.familyName
+                    email = task.result.email
+                    image = task.result.photoUrl
+
                     viewModel.loginWithGoogle(account.idToken!!) {
                         navigateFromGoogleToMenu()
                     }
+                    viewModel.insertGoogleUser(name,lastName,email,image)
                 } catch (e: ApiException) {
                     Toast.makeText(context, "Ha ocurrido un error ${e.message}", Toast.LENGTH_SHORT)
                         .show()

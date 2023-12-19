@@ -39,6 +39,7 @@ fun UserProfileScreen(
     var lastName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var image:String by remember { mutableStateOf("") }
 
     // Observa los cambios en el flujo userData
     val userData by userProfileViewModel.userData.collectAsState()
@@ -49,6 +50,7 @@ fun UserProfileScreen(
         lastName = user.lastName
         email = user.email
         password = user.password
+        image = user.image
     }
 
 
@@ -59,7 +61,8 @@ fun UserProfileScreen(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         item {
-            HeaderImage()
+            Spacer(modifier = Modifier.size(16.dp))
+            HeaderImage(image = image)
         }
         item { Spacer(modifier = Modifier.size(8.dp)) }
         item {
@@ -71,7 +74,7 @@ fun UserProfileScreen(
         }
         item { Spacer(modifier = Modifier.size(8.dp)) }
         item {
-            UserEmail(email, onEmailChange = {email = it})
+            UserEmail(email = email, onEmailChange = {email = it})
         }
         item { Spacer(modifier = Modifier.size(8.dp)) }
         item {
