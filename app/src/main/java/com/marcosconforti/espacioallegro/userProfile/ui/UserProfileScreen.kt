@@ -5,14 +5,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Create
-import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -25,11 +17,13 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.marcosconforti.espacioallegro.userProfile.ui.components.HeaderImage
 import com.marcosconforti.espacioallegro.userProfile.ui.components.UserEmail
+import com.marcosconforti.espacioallegro.userProfile.ui.components.UserInstrument
 import com.marcosconforti.espacioallegro.userProfile.ui.components.UserLastName
+import com.marcosconforti.espacioallegro.userProfile.ui.components.UserLocation
 import com.marcosconforti.espacioallegro.userProfile.ui.components.UserName
 import com.marcosconforti.espacioallegro.userProfile.ui.components.UserPassword
+import com.marcosconforti.espacioallegro.userProfile.ui.components.UserProfileButton
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UserProfileScreen(
     userProfileViewModel: UserProfileViewModel = hiltViewModel()
@@ -39,7 +33,7 @@ fun UserProfileScreen(
     var lastName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var image:String by remember { mutableStateOf("") }
+    var image: String by remember { mutableStateOf("") }
 
     // Observa los cambios en el flujo userData
     val userData by userProfileViewModel.userData.collectAsState()
@@ -53,7 +47,6 @@ fun UserProfileScreen(
         image = user.image
     }
 
-
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -63,52 +56,20 @@ fun UserProfileScreen(
         item {
             Spacer(modifier = Modifier.size(16.dp))
             HeaderImage(image = image)
-        }
-        item { Spacer(modifier = Modifier.size(8.dp)) }
-        item {
+            Spacer(modifier = Modifier.size(8.dp))
             UserName(name = name, onUserNameChange = { name = it })
-        }
-        item { Spacer(modifier = Modifier.size(8.dp)) }
-        item {
-            UserLastName(lastName = lastName, onLastNameChange = {lastName = it})
-        }
-        item { Spacer(modifier = Modifier.size(8.dp)) }
-        item {
-            UserEmail(email = email, onEmailChange = {email = it})
-        }
-        item { Spacer(modifier = Modifier.size(8.dp)) }
-        item {
+            Spacer(modifier = Modifier.size(8.dp))
+            UserLastName(lastName = lastName, onLastNameChange = { lastName = it })
+            Spacer(modifier = Modifier.size(8.dp))
+            UserEmail(email = email, onEmailChange = { email = it })
+            Spacer(modifier = Modifier.size(8.dp))
             UserPassword(password = password, onPasswordChange = { password = it })
-        }
-        item { Spacer(modifier = Modifier.size(8.dp)) }
-        item {
-            OutlinedTextField(value = "Ubicacion",
-                onValueChange = { },
-                label = { Text("Ubicacion") },
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.LocationOn,
-                        contentDescription = null
-                    )
-                })
-        }
-        item { Spacer(modifier = Modifier.size(8.dp)) }
-        item {
-            OutlinedTextField(value = "Que deseas Aprender?",
-                onValueChange = { },
-                label = { Text("Que deseas aprender?") },
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Create,
-                        contentDescription = null
-                    )
-                })
-        }
-        item { Spacer(modifier = Modifier.size(8.dp)) }
-        item {
-            Button(onClick = { /*TODO*/ }) {
-                Text(text = "Guardar Cambios")
-            }
+            Spacer(modifier = Modifier.size(8.dp))
+            UserLocation()
+            Spacer(modifier = Modifier.size(8.dp))
+            UserInstrument()
+            Spacer(modifier = Modifier.size(8.dp))
+            UserProfileButton()
         }
     }
 }
