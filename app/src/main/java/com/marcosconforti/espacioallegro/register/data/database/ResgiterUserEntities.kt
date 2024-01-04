@@ -12,7 +12,9 @@ data class RegisterUserEntities(
     @ColumnInfo(name = "lastName") val lastName: String,
     @ColumnInfo(name = "email") val email: String,
     @ColumnInfo(name = "password") val password: String,
-    @ColumnInfo(name = "image") val image: String
+    @ColumnInfo(name = "image") val image: String,
+    @ColumnInfo(name = "location") val location: String,
+    @ColumnInfo(name = "instrument") val instrument: String
     )
 
 //Posible mapeo

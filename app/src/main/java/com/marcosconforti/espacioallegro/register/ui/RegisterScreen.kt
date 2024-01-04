@@ -38,6 +38,7 @@ fun RegisterScreen(registerViewModel: RegisterViewModel = hiltViewModel(),
     val context = LocalContext.current
     val keyboardController = LocalSoftwareKeyboardController.current
     val textInputService = LocalTextInputService.current
+
     Column(
         modifier = Modifier
             .fillMaxSize()

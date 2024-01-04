@@ -11,7 +11,7 @@ class RegisterRepository @Inject constructor(private val dao: RegisterUserDao) {
         return dao.getUser()
     }
 
-    suspend fun insertUser(user:RegisterUserEntities) = dao.insert(user)
+    suspend fun insertUser(user:RegisterUserEntities) = dao.insertUser(user)
 
     suspend fun deleteUser() = dao.deleteUser()
 }

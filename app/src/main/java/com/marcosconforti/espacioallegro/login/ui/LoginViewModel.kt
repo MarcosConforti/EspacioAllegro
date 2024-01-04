@@ -81,7 +81,9 @@ class LoginViewModel @Inject constructor(
                 lastName = lastName.orEmpty(),
                 email = email.orEmpty(),
                 password = "",
-                image = image.toString()
+                image = image.toString(),
+                location = "",
+                instrument = ""
             )
             repository.insertUser(insertUser)
             Log.i("probando Room ", "los datos son $insertUser")

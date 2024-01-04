@@ -18,9 +18,9 @@ import androidx.compose.ui.Modifier
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UserInstrument() {
+fun UserInstrument(instrument:String, onInstrumentChange:(String)-> Unit) {
 
-    var instruments by remember { mutableStateOf("Que deseas aprender?") }
+   // var selectedInstruments by remember { mutableStateOf(instrument) }
     var expanded by remember { mutableStateOf(false) }
 
     val instrumentos = listOf(
@@ -36,7 +36,7 @@ fun UserInstrument() {
             expanded = expanded,
             onExpandedChange = { expanded = it }) {
             OutlinedTextField(
-                value = instruments,
+                value = instrument,
                 onValueChange = {},
                 label = { Text("Que deseas aprender?") },
                 readOnly = true,
@@ -54,7 +54,7 @@ fun UserInstrument() {
                             Text(text = instrumentosItem)
                         },
                         onClick = {
-                            instruments = instrumentosItem
+                            onInstrumentChange(instrumentosItem)
                             expanded = false
                         }
                     )
