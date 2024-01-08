@@ -25,7 +25,7 @@ import com.marcosconforti.espacioallegro.userProfile.ui.UserProfileScreen
 fun Navigator(navigationController: NavHostController, viewModel: SplashViewModel) {
 
 
-    NavHost(navController = navigationController, startDestination = Menu.route) {
+    NavHost(navController = navigationController, startDestination = Login.route) {
 
         composable(Login.route) {
             LoginScreen(

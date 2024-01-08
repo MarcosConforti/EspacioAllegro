@@ -1,5 +1,6 @@
 package com.marcosconforti.espacioallegro.userProfile.ui
 
+import android.net.Uri
 import android.widget.Toast
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.marcosconforti.espacioallegro.userProfile.ui.components.HeaderImage
 import com.marcosconforti.espacioallegro.userProfile.ui.components.UserEmail
@@ -37,7 +39,7 @@ fun UserProfileScreen(
     var lastName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var image by remember { mutableStateOf("") }
+    var image by remember { mutableStateOf<Uri?>(null) }
     var location by remember { mutableStateOf("") }
     var instrument by remember { mutableStateOf("") }
 
@@ -53,7 +55,7 @@ fun UserProfileScreen(
         lastName = user.lastName
         email = user.email
         password = user.password
-        image = user.image
+        image = user.image.toUri()
         location = user.location
         instrument = user.instrument
     }
@@ -66,7 +68,7 @@ fun UserProfileScreen(
     ) {
         item {
             Spacer(modifier = Modifier.size(16.dp))
-            HeaderImage(image = image)
+            HeaderImage(image = image, onImageSelected = {image = it})
             Spacer(modifier = Modifier.size(8.dp))
             UserName(name = name, onUserNameChange = { name = it })
             Spacer(modifier = Modifier.size(8.dp))

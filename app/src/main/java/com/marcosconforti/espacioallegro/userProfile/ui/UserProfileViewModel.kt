@@ -1,5 +1,6 @@
 package com.marcosconforti.espacioallegro.userProfile.ui
 
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -35,7 +36,7 @@ class UserProfileViewModel @Inject constructor(private val repository: RegisterR
         lastName: String,
         email: String,
         password: String,
-        image: String,
+        image: Uri?,
         location: String,
         instrument: String
     ) {
@@ -46,7 +47,7 @@ class UserProfileViewModel @Inject constructor(private val repository: RegisterR
                 lastName = lastName,
                 email = email,
                 password = password,
-                image = image,
+                image = image.toString(),
                 location = location,
                 instrument = instrument
             )
