@@ -13,10 +13,7 @@ interface RegisterUserDao {
     fun getUser(): Flow<List<RegisterUserEntities>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertUser(user: List<RegisterUserEntities>)
-
-    @Insert
-    suspend fun insert(user: RegisterUserEntities)
+    suspend fun insertUser(user: RegisterUserEntities)
 
     @Query("DELETE FROM user_table")
     suspend fun deleteUser()

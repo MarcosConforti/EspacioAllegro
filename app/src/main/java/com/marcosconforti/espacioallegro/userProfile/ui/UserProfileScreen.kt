@@ -1,5 +1,7 @@
 package com.marcosconforti.espacioallegro.userProfile.ui
 
+import android.net.Uri
+import android.widget.Toast
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -8,12 +10,15 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.marcosconforti.espacioallegro.userProfile.ui.components.HeaderImage
 import com.marcosconforti.espacioallegro.userProfile.ui.components.UserEmail
@@ -29,22 +34,30 @@ fun UserProfileScreen(
     userProfileViewModel: UserProfileViewModel = hiltViewModel()
 ) {
     userProfileViewModel.getUserData()
+    var id by remember { mutableIntStateOf(0) }
     var name by remember { mutableStateOf("") }
     var lastName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var image: String by remember { mutableStateOf("") }
+    var image by remember { mutableStateOf<Uri?>(null) }
+    var location by remember { mutableStateOf("") }
+    var instrument by remember { mutableStateOf("") }
 
     // Observa los cambios en el flujo userData
     val userData by userProfileViewModel.userData.collectAsState()
 
+    val context = LocalContext.current
+
     // Actualiza las variables de estado al recibir nuevos datos
     userData.firstOrNull()?.let { user ->
+        id = user.id
         name = user.name
         lastName = user.lastName
         email = user.email
         password = user.password
-        image = user.image
+        image = user.image.toUri()
+        location = user.location
+        instrument = user.instrument
     }
 
     LazyColumn(
@@ -55,7 +68,7 @@ fun UserProfileScreen(
     ) {
         item {
             Spacer(modifier = Modifier.size(16.dp))
-            HeaderImage(image = image)
+            HeaderImage(image = image, onImageSelected = {image = it})
             Spacer(modifier = Modifier.size(8.dp))
             UserName(name = name, onUserNameChange = { name = it })
             Spacer(modifier = Modifier.size(8.dp))
@@ -65,11 +78,29 @@ fun UserProfileScreen(
             Spacer(modifier = Modifier.size(8.dp))
             UserPassword(password = password, onPasswordChange = { password = it })
             Spacer(modifier = Modifier.size(8.dp))
-            UserLocation()
+            UserLocation(location = location, onLocationChange = { location = it })
             Spacer(modifier = Modifier.size(8.dp))
-            UserInstrument()
+            UserInstrument(instrument = instrument, onInstrumentChange = { instrument = it })
             Spacer(modifier = Modifier.size(8.dp))
-            UserProfileButton()
+            UserProfileButton(
+                onUpdateUserListener = {
+                    userProfileViewModel.updateUserData(
+                        id = id,
+                        name = name,
+                        lastName = lastName,
+                        email = email,
+                        password = password,
+                        image = image,
+                        location = location,
+                        instrument = instrument
+                    )
+                    Toast.makeText(
+                        context,
+                        "Se han guardado los cambios",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            )
         }
     }
 }

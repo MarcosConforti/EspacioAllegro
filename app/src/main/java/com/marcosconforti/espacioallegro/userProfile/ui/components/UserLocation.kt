@@ -14,8 +14,9 @@ import androidx.compose.ui.Modifier
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UserLocation() {
-    var ubicacion by remember { mutableStateOf("Ubicacion") }
+fun UserLocation(location:String, onLocationChange:(String)-> Unit) {
+
+    //var selectedLocation by remember { mutableStateOf(location) }
     var expanded by remember { mutableStateOf(false) }
 
     val ubicaciones = listOf(
@@ -31,7 +32,7 @@ fun UserLocation() {
             expanded = expanded,
             onExpandedChange = { expanded = it }) {
             OutlinedTextField(
-                value = ubicacion,
+                value = location,
                 onValueChange = {},
                 label = { Text("Ubicacion") },
                 readOnly = true,
@@ -49,7 +50,7 @@ fun UserLocation() {
                             Text(text = ubicacionItem)
                         },
                         onClick = {
-                            ubicacion = ubicacionItem
+                            onLocationChange(ubicacionItem)
                             expanded = false
                         }
                     )

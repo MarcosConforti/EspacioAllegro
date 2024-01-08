@@ -58,7 +58,9 @@ class RegisterViewModel @Inject constructor(
                 lastName = lastName,
                 email = email,
                 password = password,
-                image = image.toString()
+                image = image.toString(),
+                location = "",
+                instrument = ""
             )
             repository.insertUser(insertUser)
             Log.i("probando Room ","los datos son $insertUser")
